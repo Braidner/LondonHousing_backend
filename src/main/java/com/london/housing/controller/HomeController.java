@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 /**
  * @author smith
  */
-@Controller("/aaaa")
+@Controller("")
 public class HomeController {
 
 //    @RequestMapping
