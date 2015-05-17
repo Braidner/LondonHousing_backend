@@ -2,14 +2,15 @@ package com.london.housing.controller;
 
 import com.london.housing.entity.Borough;
 import com.london.housing.model.Location;
-import com.london.housing.utils.PMF;
 import com.london.housing.utils.JsonLoader;
+import com.london.housing.utils.PMF;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.jdo.PersistenceManager;
 import java.io.File;
@@ -20,7 +21,7 @@ import java.util.List;
 /**
  * @author smith
  */
-@Controller
+@RestController
 @RequestMapping("/install")
 public class InstallController {
 
@@ -28,7 +29,7 @@ public class InstallController {
     private JsonLoader jsonLoader;
 
     @RequestMapping("initDB")
-    public void initDB() throws IOException {
+    public @ResponseBody List<Borough> initDB() throws IOException {
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(this.getClass().getClassLoader());
         Resource[] resources = resolver.getResources("/locations/*.json");
 
@@ -43,13 +44,18 @@ public class InstallController {
         }
 
         try {
-            pm.makePersistentAll(boroughs);
+            for (Borough borough : boroughs) {
+                borough.setCoordinates(null);
+                pm.makePersistent(borough);
+            }
         } finally {
             pm.close();
         }
 
 
         System.out.println("TEST");
+
+        return boroughs;
     }
 
 

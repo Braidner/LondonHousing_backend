@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <packaging>war</packaging>
@@ -92,7 +92,12 @@
             <version>${datanucleus.version}</version>
             <scope>runtime</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.datanucleus</groupId>
+            <artifactId>datanucleus-api-jdo</artifactId>
+            <version>${datanucleus.version}</version>
+            <scope>runtime</scope>
+        </dependency>
 
 
         <!-- WEB Deps -->
@@ -181,7 +186,6 @@
                     <api>JDO</api>
                     <props>${basedir}/datanucleus.properties</props>
                     <verbose>true</verbose>
-                    <enhancerName>ASM</enhancerName>
                 </configuration>
                 <executions>
                     <execution>
