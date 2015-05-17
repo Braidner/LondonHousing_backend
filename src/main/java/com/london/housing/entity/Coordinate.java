@@ -1,6 +1,7 @@
 package com.london.housing.entity;
 
 import com.google.appengine.api.datastore.Key;
+import com.google.appengine.repackaged.org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.PersistenceCapable;
@@ -22,6 +23,10 @@ public class Coordinate {
 
     @Persistent
     private Float longitude;
+
+    @Persistent
+    @JsonIgnore
+    private Borough borough;
 
     public Coordinate() {
     }
@@ -53,5 +58,13 @@ public class Coordinate {
 
     public void setLongitude(Float longitude) {
         this.longitude = longitude;
+    }
+
+    public Borough getBorough() {
+        return borough;
+    }
+
+    public void setBorough(Borough borough) {
+        this.borough = borough;
     }
 }

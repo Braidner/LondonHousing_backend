@@ -2,10 +2,7 @@ package com.london.housing.entity;
 
 import com.google.appengine.api.datastore.Key;
 
-import javax.jdo.annotations.IdGeneratorStrategy;
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.Persistent;
-import javax.jdo.annotations.PrimaryKey;
+import javax.jdo.annotations.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,33 +11,20 @@ import java.util.List;
  */
 @PersistenceCapable
 public class Borough {
-
-    @PrimaryKey
-    @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-    private Key key;
-
     @Persistent
     private String name;
 
-    @Persistent
+    @PrimaryKey
     private String code;
 
     @Persistent
     private String mapId;
 
-    @Persistent
+    @Persistent(mappedBy = "ward")
     private List<Ward> wards;
 
-    @Persistent
+    @Persistent(mappedBy = "borough", loadFetchGroup = "true")
     private List<Coordinate> coordinates;
-
-    public Key getKey() {
-        return key;
-    }
-
-    public void setKey(Key key) {
-        this.key = key;
-    }
 
     public String getName() {
         return name;
