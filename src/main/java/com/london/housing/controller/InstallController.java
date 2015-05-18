@@ -51,7 +51,6 @@ public class InstallController {
                 commonRepository.addCoordinateToBorough(borough, coordinate);
             }
         }
-
         return "Database initialized";
     }
 
