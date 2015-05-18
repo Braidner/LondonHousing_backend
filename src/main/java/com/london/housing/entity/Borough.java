@@ -24,6 +24,7 @@ public class Borough {
     private List<Ward> wards;
 
     @Persistent(mappedBy = "borough", loadFetchGroup = "true")
+    @Element(dependent = "true")
     private List<Coordinate> coordinates;
 
     public String getName() {

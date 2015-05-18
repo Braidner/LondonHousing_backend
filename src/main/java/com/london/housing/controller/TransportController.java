@@ -18,7 +18,7 @@ public class TransportController {
     private TransportService transportService;
 
     @RequestMapping
-    public String test() {
+    public @ResponseBody String test() {
         return "rest";
     }
 

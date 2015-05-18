@@ -25,7 +25,6 @@ public class Coordinate {
     private Float longitude;
 
     @Persistent
-    @JsonIgnore
     private Borough borough;
 
     public Coordinate() {

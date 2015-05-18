@@ -44,7 +44,12 @@ public class InstallController {
             File file = resource.getFile();
             Location location = jsonLoader.loadLondonPolygon(file);
             Borough borough = location.createBorough();
+            List<Coordinate> coordinates = borough.getCoordinates();
+            borough.setCoordinates(null);
             commonRepository.saveEntity(borough);
+            for (Coordinate coordinate : coordinates) {
+                commonRepository.addCoordinateToBorough(borough, coordinate);
+            }
         }
 
         return "Database initialized";
