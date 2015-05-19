@@ -27,6 +27,7 @@ public class CommonRepository {
         for (Entity entity : entities) {
             pm.currentTransaction().begin();
             try {
+                System.out.println(entity.getKey());
                 Key key = KeyFactory.createKey(Borough.class.getSimpleName(), entity.getKey().getName());
                 Borough borough = pm.getObjectById(Borough.class, key);
                 pm.deletePersistent(borough);
