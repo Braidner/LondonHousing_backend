@@ -1,12 +1,14 @@
 package com.london.housing.controller;
 
-import com.google.appengine.api.datastore.*;
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.labs.repackaged.com.google.common.collect.Lists;
 import com.london.housing.entity.Borough;
 import com.london.housing.entity.Coordinate;
 import com.london.housing.model.Location;
 import com.london.housing.repository.CommonRepository;
 import com.london.housing.utils.JsonLoader;
-import com.london.housing.utils.PMF;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -15,11 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.jdo.PersistenceManager;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -47,8 +46,9 @@ public class InstallController {
             List<Coordinate> coordinates = borough.getCoordinates();
             borough.setCoordinates(null);
             commonRepository.saveEntity(borough);
-            for (Coordinate coordinate : coordinates) {
-                commonRepository.addCoordinateToBorough(borough, coordinate);
+            List<List<Coordinate>> smallLists = Lists.partition(coordinates, 1000);
+            for (List<Coordinate> part : smallLists) {
+                commonRepository.addCoordinatesToBorough(borough, part);
             }
         }
         return "Database initialized";

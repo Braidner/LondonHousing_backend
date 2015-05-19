@@ -1,9 +1,6 @@
 package com.london.housing.repository;
 
-import com.google.appengine.api.datastore.DatastoreService;
-import com.google.appengine.api.datastore.Entity;
-import com.google.appengine.api.datastore.FetchOptions;
-import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.*;
 import com.london.housing.entity.Borough;
 import com.london.housing.entity.Coordinate;
 import com.london.housing.utils.PMF;
@@ -28,7 +25,17 @@ public class CommonRepository {
         Query query = new Query(clazzName);
         List<Entity> entities = service.prepare(query).asList(FetchOptions.Builder.withDefaults());
         for (Entity entity : entities) {
-            service.delete(entity.getKey());
+            pm.currentTransaction().begin();
+            try {
+                Key key = KeyFactory.createKey(Borough.class.getSimpleName(), entity.getKey().getName());
+                Borough borough = pm.getObjectById(Borough.class, key);
+                pm.deletePersistent(borough);
+                pm.currentTransaction().commit();
+            } finally {
+                if (pm.currentTransaction().isActive()) {
+                    pm.currentTransaction().rollback();
+                }
+            }
         }
     }
 
@@ -50,11 +57,23 @@ public class CommonRepository {
     }
 
     public void addCoordinateToBorough(Borough borough, Coordinate coordinate) {
-        PersistenceManager pm = PMF.get().getPersistenceManager();
         pm.currentTransaction().begin();
         try {
             Borough object = pm.getObjectById(Borough.class, borough.getCode());
             object.getCoordinates().add(coordinate);
+            pm.currentTransaction().commit();
+        } finally {
+            if (pm.currentTransaction().isActive()) {
+                pm.currentTransaction().rollback();
+            }
+        }
+    }
+
+    public void addCoordinatesToBorough(Borough borough, List<Coordinate> coordinates) {
+        pm.currentTransaction().begin();
+        try {
+            Borough object = pm.getObjectById(Borough.class, borough.getCode());
+            object.getCoordinates().addAll(coordinates);
             pm.currentTransaction().commit();
         } finally {
             if (pm.currentTransaction().isActive()) {
