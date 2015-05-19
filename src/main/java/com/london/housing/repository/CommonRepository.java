@@ -15,21 +15,21 @@ import java.util.List;
 @Repository
 public class CommonRepository {
 
-    private PersistenceManager pm;
+    protected PersistenceManager pm;
 
     public CommonRepository() {
         pm = PMF.get().getPersistenceManager();
     }
 
-    public void deleteAll(DatastoreService service, String clazzName) {
-        Query query = new Query(clazzName);
+    public void deleteAll(DatastoreService service, Class clazz) {
+        Query query = new Query(clazz.getSimpleName());
         List<Entity> entities = service.prepare(query).asList(FetchOptions.Builder.withDefaults());
         for (Entity entity : entities) {
             pm.currentTransaction().begin();
             try {
                 System.out.println(entity.getKey());
-                Key key = KeyFactory.createKey(Borough.class.getSimpleName(), entity.getKey().getName());
-                Borough borough = pm.getObjectById(Borough.class, key);
+                Key key = KeyFactory.createKey(clazz.getSimpleName(), entity.getKey().getName());
+                Object borough = pm.getObjectById(clazz, key);
                 pm.deletePersistent(borough);
                 pm.currentTransaction().commit();
             } finally {

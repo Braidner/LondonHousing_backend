@@ -65,8 +65,8 @@ public class InstallController {
     @RequestMapping("eraseDB")
     public @ResponseBody String eraseDB() {
         DatastoreService datastoreService = DatastoreServiceFactory.getDatastoreService();
-        commonRepository.deleteAll(datastoreService, Borough.class.getSimpleName());
-        commonRepository.deleteAll(datastoreService, Coordinate.class.getSimpleName());
+        commonRepository.deleteAll(datastoreService, Borough.class);
+        commonRepository.deleteAll(datastoreService, Coordinate.class);
         return "Database clear";
     }
 
