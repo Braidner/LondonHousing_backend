@@ -1,30 +1,21 @@
 package com.london.housing.entity;
 
-import com.google.appengine.api.datastore.Key;
-import com.google.appengine.repackaged.org.codehaus.jackson.annotate.JsonIgnore;
-
-import javax.jdo.annotations.IdGeneratorStrategy;
-import javax.jdo.annotations.PersistenceCapable;
-import javax.jdo.annotations.Persistent;
-import javax.jdo.annotations.PrimaryKey;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * @author smith
  */
-@PersistenceCapable
-public class Coordinate {
+@Entity
+@Table(name = "Coordinate")
+public class Coordinate extends BaseEntity {
 
-    @PrimaryKey
-    @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-    private Key key;
-
-    @Persistent
     private Float latitude;
 
-    @Persistent
     private Float longitude;
 
-    @Persistent
+    @ManyToOne
     private Borough borough;
 
     public Coordinate() {
@@ -33,14 +24,6 @@ public class Coordinate {
     public Coordinate(Float latitude, Float longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
-    }
-
-    public Key getKey() {
-        return key;
-    }
-
-    public void setKey(Key key) {
-        this.key = key;
     }
 
     public Float getLatitude() {

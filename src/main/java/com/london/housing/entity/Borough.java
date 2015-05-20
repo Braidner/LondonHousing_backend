@@ -1,30 +1,32 @@
 package com.london.housing.entity;
 
-import com.google.appengine.api.datastore.Key;
-
-import javax.jdo.annotations.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author smith
  */
-@PersistenceCapable
-public class Borough {
-    @Persistent
+@Entity(name = "Borough")
+@Table(name = "Borough")
+public class Borough extends BaseEntity {
+
+    @Column(table = "Borough", name = "name")
     private String name;
 
-    @PrimaryKey
+    @Column(table = "Borough", name = "code")
     private String code;
 
-    @Persistent
+    @Column(table = "Borough", name = "map_id")
     private String mapId;
 
-    @Persistent(mappedBy = "ward")
+    @OneToMany
     private List<Ward> wards;
 
-    @Persistent(mappedBy = "borough", loadFetchGroup = "true")
-    @Element(dependent = "true")
+    @OneToMany
     private List<Coordinate> coordinates;
 
     public String getName() {

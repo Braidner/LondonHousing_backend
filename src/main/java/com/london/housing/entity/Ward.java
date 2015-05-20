@@ -2,20 +2,20 @@ package com.london.housing.entity;
 
 import com.google.appengine.api.datastore.Key;
 
-import javax.jdo.annotations.IdGeneratorStrategy;
-import javax.jdo.annotations.Persistent;
-import javax.jdo.annotations.PrimaryKey;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * @author smith
  */
-public class Ward {
+@Entity
+@Table(name = "Ward")
+public class Ward extends BaseEntity {
 
-    @PrimaryKey
-    @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
     private Key key;
 
-    @Persistent
+    @ManyToOne
     private Borough borough;
 
     public Borough getBorough() {

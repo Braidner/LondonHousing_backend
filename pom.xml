@@ -11,7 +11,7 @@
     <properties>
         <appengine.app.version>1</appengine.app.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.version>4.1.5.RELEASE</spring.version>
+        <spring.version>4.1.6.RELEASE</spring.version>
         <spring.security.version>3.2.6.RELEASE</spring.security.version>
         <jackson.version>2.5.1</jackson.version>
         <datanucleus.version>3.1.3</datanucleus.version>
@@ -32,6 +32,33 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>4.1.6.RELEASE</version>
+        </dependency>
+
+        <!-- Hibernate-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>4.3.10.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>4.3.10.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-annotations</artifactId>
+            <version>3.5.6-Final</version>
         </dependency>
 
         <!-- POI -->
@@ -85,23 +112,6 @@
             <groupId>com.google.appengine</groupId>
             <artifactId>appengine-api-labs</artifactId>
             <version>1.9.20</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.appengine.orm</groupId>
-            <artifactId>datanucleus-appengine</artifactId>
-            <version>2.1.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.datanucleus</groupId>
-            <artifactId>datanucleus-core</artifactId>
-            <version>${datanucleus.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.datanucleus</groupId>
-            <artifactId>datanucleus-api-jdo</artifactId>
-            <version>${datanucleus.version}</version>
-            <scope>runtime</scope>
         </dependency>
 
 
@@ -184,33 +194,6 @@
             </plugin>
 
             <plugin>
-                <groupId>org.datanucleus</groupId>
-                <artifactId>maven-datanucleus-plugin</artifactId>
-                <version>${datanucleus.version}</version>
-                <configuration>
-                    <api>JDO</api>
-                    <props>${basedir}/datanucleus.properties</props>
-                    <verbose>true</verbose>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>process-classes</phase>
-                        <goals>
-                            <goal>enhance</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.datanucleus</groupId>
-                        <artifactId>datanucleus-api-jdo</artifactId>
-                        <version>${datanucleus.version}</version>
-                        <scope>runtime</scope>
-                    </dependency>
-                </dependencies>
-            </plugin>
-
-            <plugin>
                 <groupId>com.google.appengine</groupId>
                 <artifactId>appengine-maven-plugin</artifactId>
                 <version>1.9.20</version>
@@ -221,10 +204,10 @@
                     <port>8080</port -->
                     <!-- Comment in the below snippet to enable local debugging with a remove debugger
                          like those included with Eclipse or IntelliJ -->
-                    <jvmFlags>
-                        <jvmFlag>-Xdebug</jvmFlag>
-                        <jvmFlag>-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n</jvmFlag>
-                    </jvmFlags>
+                    <!--<jvmFlags>-->
+                        <!--<jvmFlag>-Xdebug</jvmFlag>-->
+                        <!--<jvmFlag>-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n</jvmFlag>-->
+                    <!--</jvmFlags>-->
                 </configuration>
             </plugin>
 
