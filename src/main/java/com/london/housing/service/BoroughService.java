@@ -23,24 +23,8 @@ public class BoroughService implements Serializable {
 
     public void saveBoroughs(List<Borough> boroughs) {
         for (Borough borough : boroughs) {
-            Queue queue = QueueFactory.getDefaultQueue();
-            queue.add(TaskOptions.Builder.withPayload(new Work(borough))
-                    .etaMillis(System.currentTimeMillis() + 5000));
-        }
-    }
-
-    private class Work implements DeferredTask {
-
-        private Borough borough;
-
-        Work(Borough borough) {
-            this.borough = borough;
-        }
-
-        @Override
-        public void run() {
-            System.out.println("Start Saving borough: " + borough.getName());
-            boroughRepository.save(borough);
+            boroughRepository.saveBorough(borough);
+            System.out.println("Borough: " + borough.getName() + " - " + borough.getCoordinates().size());
         }
     }
 }

@@ -15,7 +15,7 @@ public class Coordinate extends BaseEntity {
     @Column(name = "longitude")
     private Float longitude;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "borough_id")
     private Borough borough;
 

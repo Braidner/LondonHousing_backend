@@ -28,7 +28,9 @@ public class Location {
 
         for (List<List<Float>> coordinate : coordinates) {
             for (List<Float> points : coordinate) {
-                borough.getCoordinates().add(new Coordinate(points.get(1), points.get(0)));
+                Coordinate coord = new Coordinate(points.get(1), points.get(0));
+                coord.setBorough(borough);
+                borough.getCoordinates().add(coord);
             }
         }
 

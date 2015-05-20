@@ -22,7 +22,7 @@ public abstract class CommonRepository implements Serializable {
     }
 
     @SuppressWarnings("unchecked")
-    public <T extends BaseEntity> T save(T entity) {
+    protected  <T extends BaseEntity> T save(T entity) {
         Long id = (Long) openSession().save(entity);
         return entity;
     }

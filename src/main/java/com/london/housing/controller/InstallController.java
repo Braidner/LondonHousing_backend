@@ -1,6 +1,5 @@
 package com.london.housing.controller;
 
-import com.google.appengine.api.datastore.Entity;
 import com.london.housing.entity.Borough;
 import com.london.housing.model.Location;
 import com.london.housing.service.BoroughService;
@@ -48,12 +47,6 @@ public class InstallController {
         boroughService.saveBoroughs(boroughs);
         System.out.println(boroughs.size());
         return "Database initialized";
-    }
-
-    @RequestMapping("loadDB")
-    public @ResponseBody List<Entity> loadDB() {
-
-        return null;
     }
 
     @RequestMapping("eraseDB")

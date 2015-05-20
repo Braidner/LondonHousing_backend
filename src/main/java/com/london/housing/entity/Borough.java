@@ -2,7 +2,9 @@ package com.london.housing.entity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author smith
@@ -21,11 +23,10 @@ public class Borough extends BaseEntity {
     private String mapId;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "borough")
-    private List<Ward> wards;
+    private Set<Ward> wards;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "borough_id", referencedColumnName = "id")
-    private List<Coordinate> coordinates;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "borough")
+    private Set<Coordinate> coordinates;
 
     public String getName() {
         return name;
@@ -51,20 +52,20 @@ public class Borough extends BaseEntity {
         this.mapId = mapId;
     }
 
-    public List<Ward> getWards() {
+    public Set<Ward> getWards() {
         return wards;
     }
 
-    public void setWards(List<Ward> wards) {
+    public void setWards(Set<Ward> wards) {
         this.wards = wards;
     }
 
-    public List<Coordinate> getCoordinates() {
-        if (coordinates == null) coordinates = new ArrayList<>();
+    public Set<Coordinate> getCoordinates() {
+        if (coordinates == null) coordinates = new HashSet<>();
         return coordinates;
     }
 
-    public void setCoordinates(List<Coordinate> coordinates) {
+    public void setCoordinates(Set<Coordinate> coordinates) {
         this.coordinates = coordinates;
     }
 }
