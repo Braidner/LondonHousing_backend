@@ -45,7 +45,7 @@ public class InstallController {
             boroughs.add(borough);
         }
 
-        boroughs =  boroughService.saveBoroughs(boroughs);
+        boroughService.saveBoroughs(boroughs);
         System.out.println(boroughs.size());
         return "Database initialized";
     }

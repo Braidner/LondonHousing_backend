@@ -1,8 +1,6 @@
 package com.london.housing.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @author smith
@@ -11,11 +9,14 @@ import javax.persistence.Table;
 @Table(name = "Coordinate")
 public class Coordinate extends BaseEntity {
 
+    @Column(name = "latitude")
     private Float latitude;
 
+    @Column(name = "longitude")
     private Float longitude;
 
     @ManyToOne
+    @JoinColumn(name = "borough_id")
     private Borough borough;
 
     public Coordinate() {

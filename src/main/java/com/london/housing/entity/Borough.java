@@ -1,9 +1,6 @@
 package com.london.housing.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,19 +11,20 @@ import java.util.List;
 @Table(name = "Borough")
 public class Borough extends BaseEntity {
 
-    @Column(table = "Borough", name = "name")
+    @Column(name = "name")
     private String name;
 
-    @Column(table = "Borough", name = "code")
+    @Column(name = "code")
     private String code;
 
-    @Column(table = "Borough", name = "map_id")
+    @Column(name = "map_id")
     private String mapId;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "borough")
     private List<Ward> wards;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "borough_id", referencedColumnName = "id")
     private List<Coordinate> coordinates;
 
     public String getName() {

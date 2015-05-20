@@ -1,8 +1,7 @@
 package com.london.housing.entity;
 
-import com.google.appengine.api.datastore.Key;
-
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -13,9 +12,8 @@ import javax.persistence.Table;
 @Table(name = "Ward")
 public class Ward extends BaseEntity {
 
-    private Key key;
-
     @ManyToOne
+    @JoinColumn(name = "borough_id")
     private Borough borough;
 
     public Borough getBorough() {
@@ -24,13 +22,5 @@ public class Ward extends BaseEntity {
 
     public void setBorough(Borough borough) {
         this.borough = borough;
-    }
-
-    public Key getKey() {
-        return key;
-    }
-
-    public void setKey(Key key) {
-        this.key = key;
     }
 }

@@ -1,15 +1,12 @@
 package com.london.housing.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
  * @author KuznetsovNE/ 20.05.2015.
  */
-@Entity
+@MappedSuperclass
 public class BaseEntity implements Serializable {
 
     @Id

@@ -56,10 +56,11 @@
             <version>4.3.10.Final</version>
         </dependency>
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-annotations</artifactId>
-            <version>3.5.6-Final</version>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.35</version>
         </dependency>
+
 
         <!-- POI -->
         <dependency>
@@ -100,6 +101,11 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>18.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.5.2</version>
         </dependency>
 
         <!--  App Engine -->
@@ -200,8 +206,7 @@
                 <configuration>
                     <enableJarClasses>false</enableJarClasses>
                     <!-- Comment in the below snippet to bind to all IPs instead of just localhost -->
-                    <!-- address>0.0.0.0</address>
-                    <port>8080</port -->
+                    <port>3131</port>
                     <!-- Comment in the below snippet to enable local debugging with a remove debugger
                          like those included with Eclipse or IntelliJ -->
                     <!--<jvmFlags>-->
