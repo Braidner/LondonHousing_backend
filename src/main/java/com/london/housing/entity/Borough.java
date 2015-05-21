@@ -2,7 +2,6 @@ package com.london.housing.entity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -26,7 +25,7 @@ public class Borough extends BaseEntity {
     private Set<Ward> wards;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "borough")
-    private Set<Coordinate> coordinates;
+    private List<Coordinate> coordinates;
 
     public String getName() {
         return name;
@@ -60,12 +59,12 @@ public class Borough extends BaseEntity {
         this.wards = wards;
     }
 
-    public Set<Coordinate> getCoordinates() {
-        if (coordinates == null) coordinates = new HashSet<>();
+    public List<Coordinate> getCoordinates() {
+        if (coordinates == null) coordinates = new ArrayList<>();
         return coordinates;
     }
 
-    public void setCoordinates(Set<Coordinate> coordinates) {
+    public void setCoordinates(List<Coordinate> coordinates) {
         this.coordinates = coordinates;
     }
 }
