@@ -3,6 +3,7 @@ package com.london.housing.service;
 import com.london.housing.entity.Borough;
 import com.london.housing.entity.Coordinate;
 import com.london.housing.repository.BoroughRepository;
+import org.apache.commons.logging.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,6 @@ public class LocationService {
                 return borough;
             }
         }
-
         return null;
     }
 

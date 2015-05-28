@@ -8,4 +8,5 @@
         <property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>
     </system-properties>
     <sessions-enabled>true</sessions-enabled>
+    <use-google-connector-j>true</use-google-connector-j>
 </appengine-web-app>

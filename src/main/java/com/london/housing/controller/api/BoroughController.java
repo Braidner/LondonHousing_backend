@@ -6,6 +6,7 @@ import com.london.housing.service.LocationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -19,8 +20,7 @@ public class BoroughController {
     private LocationService locationService;
 
     @RequestMapping("find")
-    public Borough findBorough(@PathVariable Float latitude, @PathVariable Float longitude) {
-
+    public Borough findBorough(@RequestParam Float latitude, @RequestParam Float longitude) {
         return locationService.findBorough(new Coordinate(latitude, longitude));
     }
 }

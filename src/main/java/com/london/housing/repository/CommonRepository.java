@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 
@@ -12,13 +13,14 @@ import java.io.Serializable;
  * @author smith
  */
 @Repository
+@Transactional
 public abstract class CommonRepository implements Serializable {
 
     @Autowired
     private SessionFactory sessionFactory;
 
     protected Session openSession() {
-        return sessionFactory.openSession();
+        return sessionFactory.getCurrentSession();
     }
 
     @SuppressWarnings("unchecked")
