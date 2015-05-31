@@ -19,13 +19,13 @@ public abstract class CommonRepository implements Serializable {
     @Autowired
     private SessionFactory sessionFactory;
 
-    protected Session openSession() {
+    Session openSession() {
         return sessionFactory.getCurrentSession();
     }
 
     @SuppressWarnings("unchecked")
-    protected  <T extends BaseEntity> T save(T entity) {
-        Long id = (Long) openSession().save(entity);
+    <T extends BaseEntity> T save(T entity) {
+        openSession().save(entity);
         return entity;
     }
 

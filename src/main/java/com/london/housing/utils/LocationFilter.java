@@ -8,6 +8,7 @@ import com.london.housing.entity.Coordinate;
 public class LocationFilter {
     private Coordinate coordinate;
     private String searchString;
+    private Long id;
 
     public Coordinate getCoordinate() {
         return coordinate;
@@ -23,5 +24,13 @@ public class LocationFilter {
 
     public void setSearchString(String searchString) {
         this.searchString = searchString;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 }
