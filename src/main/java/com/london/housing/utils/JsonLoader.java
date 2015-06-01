@@ -18,17 +18,14 @@ public class JsonLoader {
     }
 
     private String loadResource(File file) throws IOException {
-        InputStream is = new FileInputStream(file);
         Writer writer = new StringWriter();
         char[] buffer = new char[1024];
-        try {
+        try (InputStream is = new FileInputStream(file)) {
             Reader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
             int n;
             while ((n = reader.read(buffer)) != -1) {
                 writer.write(buffer, 0, n);
             }
-        } finally {
-            is.close();
         }
 
         return writer.toString();

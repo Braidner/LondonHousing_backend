@@ -1,7 +1,5 @@
 package com.london.housing.service;
 
-import com.google.appengine.labs.repackaged.org.json.JSONArray;
-import com.google.appengine.labs.repackaged.org.json.JSONObject;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.london.housing.api.LondonData;
@@ -9,6 +7,8 @@ import com.london.housing.model.Statistics;
 import com.london.housing.model.api.LondonResponse;
 import com.london.housing.utils.ApiUtils;
 import org.apache.poi.ss.usermodel.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 import java.io.InputStream;
